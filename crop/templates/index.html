@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Crop Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Crop Recommendation System</h2>
+        <form method="POST" action="/predict">
+            {% for field in ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall'] %}
+            <label>{{ field }}</label>
+            <input type="number" step="any" name="{{ field }}" required><br>
+            {% endfor %}
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+
+</html>
