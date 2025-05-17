@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>House Price Predictor</h1>
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="area">Area (sq meters):</label>
+                <input type="text" class="form-control" name="area" required>
+            </div>
+            <div class="form-group">
+                <label for="bedrooms">Number of Bedrooms:</label>
+                <input type="text" class="form-control" name="bedrooms" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <h3 class="mt-4">{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
