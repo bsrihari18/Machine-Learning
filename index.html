@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Netflix Data Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Netflix Data Dashboard</h1>
+
+  <h2>Top 5 Genres</h2>
+  <canvas id="genreChart" width="400" height="200"></canvas>
+
+  <h2>Top 5 Countries</h2>
+  <canvas id="countryChart" width="400" height="200"></canvas>
+
+  <h2>Releases by Year</h2>
+  <canvas id="releaseChart" width="400" height="200"></canvas>
+
+  <h2>Type Distribution</h2>
+  <canvas id="typeChart" width="400" height="200"></canvas>
+
+  <script>
+    // Genres
+    const genreCtx = document.getElementById('genreChart').getContext('2d');
+    new Chart(genreCtx, {
+      type: 'bar',
+      data: {
+        labels: {{ genres|tojson }},
+        datasets: [{
+          label: 'Top Genres',
+          data: {{ genre_values|tojson }},
+          backgroundColor: 'rgba(255, 99, 132, 0.6)'
+        }]
+      }
+    });
+
+    // Countries
+    const countryCtx = document.getElementById('countryChart').getContext('2d');
+    new Chart(countryCtx, {
+      type: 'bar',
+      data: {
+        labels: {{ countries|tojson }},
+        datasets: [{
+          label: 'Top Countries',
+          data: {{ country_values|tojson }},
+          backgroundColor: 'rgba(54, 162, 235, 0.6)'
+        }]
+      }
+    });
+
+    // Release Years
+    const releaseCtx = document.getElementById('releaseChart').getContext('2d');
+    new Chart(releaseCtx, {
+      type: 'line',
+      data: {
+        labels: {{ years|tojson }},
+        datasets: [{
+          label: 'Releases Over Years',
+          data: {{ release_values|tojson }},
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true
+        }]
+      }
+    });
+
+    // Type Distribution
+    const typeCtx = document.getElementById('typeChart').getContext('2d');
+    new Chart(typeCtx, {
+      type: 'pie',
+      data: {
+        labels: {{ types|tojson }},
+        datasets: [{
+          label: 'Type',
+          data: {{ type_values|tojson }},
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }]
+      }
+    });
+  </script>
+</body>
+</html>
